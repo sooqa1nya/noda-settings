@@ -23,6 +23,7 @@ sudo sysctl -p
 # Настройка UFW
 sudo ufw allow 22/tcp;
 sudo ufw allow 443/tcp;
+sudo ufw allow 61000/tcp;
 sudo ufw allow from $panel_ip to any port 2222 proto tcp;
 sudo ufw deny 2222;
 sudo ufw enable;
