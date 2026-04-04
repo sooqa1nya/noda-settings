@@ -6,7 +6,8 @@ echo "(Для завершения ввода нажмите Ctrl+D)"
 echo ""
 
 docker_compose=$(cat)
-
+sudo apt update
+apt install ufw
 # Включаем bbr и отключаем ipv6
 # 1. net.core.default_qdisc = fq
 grep -q '^net\.core\.default_qdisc' /etc/sysctl.conf && sudo sed -i 's/^net\.core\.default_qdisc.*/net.core.default_qdisc = fq/' /etc/sysctl.conf || echo 'net.core.default_qdisc = fq' | sudo tee -a /etc/sysctl.conf
@@ -19,6 +20,7 @@ grep -q '^net\.ipv6\.conf\.default\.disable_ipv6' /etc/sysctl.conf && sudo sed -
 # 5. net.ipv6.conf.lo.disable_ipv6 = 1
 grep -q '^net\.ipv6\.conf\.lo\.disable_ipv6' /etc/sysctl.conf && sudo sed -i 's/^net\.ipv6\.conf\.lo\.disable_ipv6.*/net.ipv6.conf.lo.disable_ipv6 = 1/' /etc/sysctl.conf || echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
+
 
 # Настройка UFW
 sudo ufw allow 22/tcp;
